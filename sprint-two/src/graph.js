@@ -1,5 +1,3 @@
-
-
 // Instantiate a new graph
 var Graph = function() {
   // Create a key that contains the node
@@ -56,14 +54,14 @@ Graph.prototype.hasEdge = function(fromNode, toNode) {
 
 // Connects two nodes in a graph by adding an edge between them.
 Graph.prototype.addEdge = function(fromNode, toNode) {
-  this.edge[fromNode, toNode] = 1;
-  this.edge[toNode, fromNode] = 1;
+  this.edge[fromNode] = 1;
+  this.edge[toNode] = 1;
 };
 
 // Remove an edge between any two specified (by value) nodes.
 Graph.prototype.removeEdge = function(fromNode, toNode) {
-  this.edge[fromNode, toNode] = 0;
-  this.edge[toNode, fromNode] = 0;
+  this.edge[fromNode] = 0;
+  this.edge[toNode] = 0;
 };
 
 // Pass in a callback which will be executed on each node of the graph.
@@ -76,5 +74,3 @@ Graph.prototype.forEachNode = function(cb) {
 /*
  * Complexity: What is the time complexity of the above functions?
  */
-
-
