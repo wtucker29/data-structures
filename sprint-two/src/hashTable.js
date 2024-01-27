@@ -45,7 +45,6 @@ HashTable.prototype.retrieve = function(k) {
       }
     }
   }
-  //return this._storage.get(index);
 };
 
 HashTable.prototype.remove = function(k) {
@@ -60,13 +59,6 @@ HashTable.prototype.remove = function(k) {
       }
     }
   }
-  // return this._storage.set(index, undefined);
-
-  // this._storage.each(function(v, k) {
-  //   if (k === index) {
-  //     delete v;
-  //   }
-  // });
 };
 
 
