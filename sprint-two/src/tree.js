@@ -1,6 +1,7 @@
 var Tree = function(value) {
   var newTree = {};
   newTree.value = value;
+  newTree.parent = null;
 
   // your code here
   newTree.children = []; // fix me
@@ -14,7 +15,27 @@ var treeMethods = {};
 treeMethods.addChild = function(value) {
   // Take input value and set it as target of node. Tree is a recursive data structure.
   // Add the node as a child of the tree (push to children array)
-  this.children.push(Tree(value));
+  var currentTree = this;
+  var childTree = Tree(value);
+  childTree.parent = currentTree;
+  this.children.push(childTree);
+
+  // Add the current node to the parent property of the new child node
+};
+
+treeMethods.removeFromParent = function(value) {
+  // Remove value from children property in parent node
+  var parentTree = this.parent;
+  for (var i = 0; i < parentTree.children.length; i++) {
+    if (parentTree.children[i].value === value) {
+      parentTree.children.splice(i, 1);
+    }
+  }
+
+  // Remove parent property from parent (set to null)
+  this.parent = null;
+
+
 };
 
 treeMethods.contains = function(target) {
@@ -41,6 +62,41 @@ treeMethods.contains = function(target) {
   return false;
 };
 
+
+
+treeMethods.traverse = function(callback) {
+  // Base Case
+  callback(this.value);
+
+  // Recursive Case
+  if (this.children.length) {
+    for (var i = 0; i < this.children.length; i++) {
+      var child = this.children[i];
+      child.traverse(callback);
+    }
+  }
+};
+
+
+
+
+
+
+
+
+
+
+
+
+// treeMethods.traverse = function(callback) {
+//   callback(this.value);
+
+//   if (!this.children) { return; }
+//   for (var i = 0; i < this.children.length; i++) {
+//     var child = this.children[i];
+//     child.traverse(callback);
+//   }
+// };
 
 
 /*
