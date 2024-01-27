@@ -16,6 +16,20 @@ describe('tree', function() {
     expect(tree.children[0].value).to.equal(5);
   });
 
+  it('should add a parent propery to the child node that refers to the parent node', function() {
+    tree.addChild(5);
+    expect(tree.children[0].parent).to.equal(tree);
+  });
+
+  it('should add remove the parent property and remove the child from the parent node', function() {
+    tree.addChild(5);
+    var child = tree.children[0];
+    tree.children[0].removeFromParent(5);
+    expect(tree.children[0]).to.equal(undefined);
+    expect(child.parent).to.equal(null);
+  });
+
+
   it('should return true for a value that the tree contains', function() {
     tree.addChild(5);
     expect(tree.contains(5)).to.equal(true);
@@ -39,6 +53,19 @@ describe('tree', function() {
     tree.children[1].addChild(8);
     expect(tree.contains(7)).to.equal(true);
     expect(tree.contains(8)).to.equal(true);
+  });
+
+  it('should traverse through all nodes in tree and apply callback function', function() {
+    tree.addChild(5);
+    tree.addChild(6);
+    tree.children[0].addChild(7);
+    tree.children[1].addChild(8);
+    var callback = function(value) {
+      value = value * 2;
+    };
+    tree.traverse(callback);
+    expect(tree.children[0].value).to.equal(10);
+    expect(tree.children[1].value).to.equal(12);
   });
 
 });
